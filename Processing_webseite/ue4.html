@@ -1,0 +1,600 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="format.css">
+    <style type="text/css">
+        p.code {
+            border-style: solid;
+            background-color: lightgrey;
+        }
+
+        p.aufgabe {
+            border-style: groove;
+            background-color: darkgray;
+            margin-left: 20px;
+        }
+
+        p.b {
+            border-style: groove;
+            background-color: wheat;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        < !-- a:link {
+            font-family: Arial;
+            font-size: 10pt;
+            text-decoration: none;
+        }
+
+        a:visited {
+            font-family: Arial;
+            font-size: 10pt;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #FF3333;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 10pt;
+        }
+
+        //-->
+    </style>
+</head>
+
+<body>
+
+    <iframe src="oben.html" width="800" height="120" name="IFrame3" id="IFrame3" scrolling="no" frameborder="0">
+        <p>Ihr Browser kann leider keine eingebe5tteten Frames anzeigen:Sie k&ouml;nnen die eingebettete Seite &uuml;ber
+            den
+            folgenden.</p>
+    </iframe>
+
+    <u>
+        <h1 style="font-size:32px; font-family:'Verdana'">Übung 4</h1>
+    </u>
+
+    <br><b style="font-size:24px"> Aufgabe 4.1 Einleitung</b>
+    <p class="aufgabe">
+        In dieser Übung beschäftigen wir uns mit der Modell der Spracherzeugung nach dem Quelle- Filter-Prinzip </br>
+        und seiner Nutzung bei der Sprachcodierung und -kompression. Bei diesem Modell wird das Sprachsignal in </br>
+        Anteile zerlegt, die von den Stimmbändern als Oszillator (bei stimmhaften Lauten) oder einer rauschhaften</br>
+        Anregung (bei stimmlosen Lauten) herrühren, d.h. der "Quelle", und solche, die aus der akustischen
+        Filterung</br>
+        der "Quelle" durch den Vokaltrakt entstehen, dem "Filter". Mit Hilfe der sogenannten Linearen Prädiktion
+        (LPC)</br>
+        lässt sich sich das Sprachsignal in der beschriebenen Weise in Quelle und Filter aufspalten. Die Software
+        PRAAT</br>
+        stellt den LPC-Algorithmus zur Verfügung, den wir für diese Übung nutzen wollen. Das Filter, das den
+        Vokaltrakt </br>
+        beschreibt, ist ein digitales Filter, wie wir es in der Vorlesung besprochen haben und wird durch seine Ordnung
+        </br>
+        gekennzeichnet, d.h. die Anzahl seiner Verzögerungsglieder.
+    </p>
+
+    <br><b style="font-size:24px"> Aufgabe 4.2 Vorbereitung</b>
+    <p class="aufgabe">
+        Als erstes lesen wir mit [Read] in PRAAT unsere Sprachdatei ein. Dann wählen wir "Formants&LPC->To LPC
+        (autocorrelation)". </br>
+        Die anderen Verfahren, die PRAAT noch anbietet, unterscheiden sich nur geringfügig in der Methode der
+        Berechnung der </br>
+        Filter-Koeffizienten. Im Einstelldialog sind besonders die Punkte "Prediction Order" (Ordnung des Filters) und
+        "Analysis</br>
+        width" (Framebreite bei der Analyse) von Interesse. Diese wollen wir in dieser Aufgabe variieren. Zusätzlich zu
+        den </br>
+        von PRAAT angebotenen Standardwerten von Order=16/Analysis Width=25ms (kurz: 16/25) werden wir Analysen bei
+        Ordnungen</br>
+        von 10, 6 und 1 durchführen, sowie Framelängen von 50 und 100 ms untersuchen. "Time step" (die
+        "Vorschubbreite" der </br>
+        Analyse) setzen wir auf denselben Wert wie "Analysis width", d.h. wir erlauben kein Überlappen von benachbarten
+        Frames.</br>
+        </br>
+        Nachdem die verschiedenen LPC-Objekte kreiert wurden, führen wir zunächst eine inverse Filterung des
+        Sprachsignals durch,</br>
+        mit der wir theoretisch die "Quelle" zurückgewinnen (Sound und LPC (16/25) gemeinsam anwählen, "Filter
+        (inverse)"). </br>
+        Das entstehende Signal, das auch als "Residual"-Signal bezeichnet wird, betrachten wir im Edit-Fenster. </br>
+        Nun gewinnen wir das ursprüngliche Signal wieder zurück (Rekonstruktion), indem wir </br>
+        das Residuum mit dem dazugehörigen LPC-Objekt (16/25) filtern.</br>
+    </p>
+
+    <table style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th>Original</th>
+            <th>Residual</th>
+            <th>Rekonstruktion</th>
+        </tr>
+        <tr>
+            <td>Fatih</td>
+            <td><img src="../ueb4/Original.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/16_25/Residual.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/16_25/Rekonstruktion.png" alt="Aufnahme" width="750" height="700"></td>
+        </tr>
+        <tr>
+            <td>Audio</td>
+            <td><audio controls>
+                    <source src="../ueb4/EsSchneit.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/Residual.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/Rekonstruktion1625.wav" type="audio/wav">
+                </audio></td>
+        </tr>
+        <tr>
+            <td>Mehmet</td>
+            <td><img src="../ueb4/mehmetOriginal.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/16_25/mehmetResidual.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/16_25/mehmetRekonstruktion.png" alt="Aufnahme" width="750" height="700"></td>
+        </tr>
+        <tr>
+            <td>Audio</td>
+            <td><audio controls>
+                    <source src="../ueb4/EsSchneit_mehmet.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/mehmetResidual.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/mehmetRekonstruktion.wav" type="audio/wav">
+                </audio></td>
+        </tr>
+        <tr>
+            <td>Taher</td>
+            <td><img src="../ueb4/taherOriginal.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/16_25/taherResidual.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/16_25/taherRekonstruktion.png" alt="Aufnahme" width="750" height="700"></td>
+        </tr>
+        <tr>
+            <td>Audio</td>
+            <td><audio controls>
+                    <source src="../ueb4/EsSchneit_Taher.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/taherResidual.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/taherRekonstruktion.wav" type="audio/wav">
+                </audio></td>
+        </tr>
+    </table>
+
+    <p class="aufgabe">Frage: </br>
+        Wie unterscheiden sich die Spektren vom Original, wie ist die Restverständlichkeit der ursprünglichen Sprache?
+        </br>
+    </p>
+
+    <p class="b">Antwort: </br>
+        Wir können beim Residual feststellen das die Amplituden kleiner geworden sind. Die Stimmhaften Vokale sind kaum
+        mehr warnehmbar. Bei rauschhaften</br>
+        Anregungen haben wir sehr große Amplituden.</br>
+        Die Restverständlichkeit beim Residual ist kaum gegeben. Das Rauschen im Hintergrund ist stärker geworden. Die
+        Rekonstruktion gleicht dem Original. </br>
+        Ich persönlich habe das Gefühl, das die Qualität der Rekonstruktion besser ist als das Original.
+    </p>
+
+    <br><b style="font-size:24px"> Aufgabe 4.3 Variation des Filters</b>
+    <p class="aufgabe">
+        Das Residual-Signal dient uns jetzt zum Testen der anderen LPC-Objekte mit den verschlechterten Parametern.</br>
+        Auch hier wählen wir das Residuum und das gewünschte LPC- Objekt an und filtern wieder. Vergleiche die
+        Qualität</br>
+        der einzelnen Varianten mit dem Original!
+        Für die 12 Qualitäten (also Filter-Ordnungen 16, 10, 6, 1 kombiniert mit Framebreiten 25, 50 und 100ms)
+        berechnen wir die Datenraten. Dazu machen wir uns Folgendes klar: Übertragen werden müssen mindestens je
+        Analyseblock
+        (also z.B. je 25ms) die Koeffizienten (Zahl entspricht der Filterordnung) und die Grundfrequenz f0. Setze hier
+        jeweils pro
+        Zahlenwert 16bit an. Vergleiche diese Datenrate mit der ursprünglichen PCM-Datenrate der Sprachdatei.
+    </p>
+    <table style="width:100%">
+        <tr>
+            <th>Fatih</th>
+            <th>16</th>
+            <th>10</th>
+            <th>6</th>
+            <th>1</th>
+        </tr>
+        <tr>
+            <th>25</th>
+            <td><img src="../ueb4/16_25/Rekonstruktion.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_25/Rekonstruktion1025.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_25/Rekonstruktion0625.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_25/Rekonstruktion0125.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/Rekonstruktion1625.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_25/Rekonstruktion1025.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_25/Rekonstruktion0625.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_25/Rekonstruktion0125.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+        <tr>
+            <th>50</th>
+            <td><img src="../ueb4/16_50/Rekonstruktion1650.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_50/Rekonstruktion1050.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_50/Rekonstruktion0650.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_50/Rekonstruktion0150.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_50/Rekonstruktion1650.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_50/Rekonstruktion1050.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_50/Rekonstruktion0650.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_50/Rekonstruktion0150.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+        <tr>
+            <th>100</th>
+            <td><img src="../ueb4/16_100/Rekonstruktion16100.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_100/Rekonstruktion101000.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_100/Rekonstruktion06100.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_100/Rekonstruktion01100.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_100/Rekonstruktion16100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_100/Rekonstruktion10100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_100/Rekonstruktion06100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_100/Rekonstruktion01100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <table style="width:100%">
+        <tr>
+            <th>Mehmet</th>
+            <th>16</th>
+            <th>10</th>
+            <th>6</th>
+            <th>1</th>
+        </tr>
+        <tr>
+            <th>25</th>
+            <td><img src="../ueb4/16_25/mehmetRekonstruktion.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_25/mehmetRekonstruktion_10_25.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_25/mehmetRekonstruktion_06_25.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_25/mehmetRekonstruktion_01_25.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/mehmetRekonstruktion.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_25/mehmetRekonstruktion_10_25.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_25/mehmetRekonstruktion_06_25.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_25/mehmetRekonstruktion_01_25.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+        <tr>
+            <th>50</th>
+            <td><img src="../ueb4/16_50/mehmetRekonstruktion_16_50.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_50/mehmetRekonstruktion_10_50.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_50/mehmetRekonstruktion_6_50.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_50/mehmetRekonstruktion_1_50.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_50/mehmetRekonstruktion_16_50.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_50/mehmetRekonstruktion_10_50.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_50/mehmetRekonstruktion_6_50.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_50/mehmetRekonstruktion_1_50.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+        <tr>
+            <th>100</th>
+            <td><img src="../ueb4/16_100/mehmetRekonstruktion_16_100.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_100/mehmetRekonstruktion_10_100.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_100/mehmetRekonstruktion_6_100.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_100/mehmetRekonstruktion_1_100.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_100/mehmetRekonstruktion_16_100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_100/mehmetRekonstruktion_10_100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_100/mehmetRekonstruktion_6_100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_100/mehmetRekonstruktion_1_100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <table style="width:100%">
+        <tr>
+            <th>Taher</th>
+            <th>16</th>
+            <th>10</th>
+            <th>6</th>
+            <th>1</th>
+        </tr>
+        <tr>
+            <th>25</th>
+            <td><img src="../ueb4/16_25/taherRekonstruktion.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_25/taherRekonstruktion_10_25.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_25/taherRekonstruktion_6_25.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_25/taherRekonstruktion_1_25.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_25/taherRekonstruktion.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_25/taherRekonstruktion_10_25.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_25/taherRekonstruktion_6_25.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_25/taherRekonstruktion_1_25.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+        <tr>
+            <th>50</th>
+            <td><img src="../ueb4/16_50/taherRekonstruktion_16_50.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_50/taherRekonstruktion_10_50.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_50/taherRekonstruktion_6_50.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_50/taherRekonstruktion_1_50.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_50/taherRekonstruktion_16_50.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_50/taherRekonstruktion_10_50.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_50/taherRekonstruktion_6_50.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_50/taherRekonstruktion_1_50.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+        <tr>
+            <th>100</th>
+            <td><img src="../ueb4/16_100/taher_16_100.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/10_100/taher_10_100.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/06_100/taher_6_100.png" alt="Aufnahme" width="650" height="600"></td>
+            <td><img src="../ueb4/01_100/taher_1_100.png" alt="Aufnahme" width="650" height="600"></td>
+        </tr>
+        <tr>
+            <th>Sound</br>Datenrate</th>
+            <td><audio controls>
+                    <source src="../ueb4/16_100/taher_16_100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/10_100/taher_10_100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/06_100/taher_6_100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+            <td><audio controls>
+                    <source src="../ueb4/01_100/taher_1_100.wav" type="audio/wav">
+                </audio>
+                <p> ___ Bits/s </p>
+            </td>
+        </tr>
+    </table>
+
+    <p class="aufgabe">Frage: </br>
+        Wie unterscheiden sich die Beispiele, bei denen die Filter-Ordnung variiert wurde, wie solche, bei denen die
+        Framebreite variiert wurde? </br>
+        Bei welcher Kombination ist die Sprachverständlichkeit nicht mehr akzeptabel? </br>
+    </p>
+
+    <p class="b">Antwort: </br>
+        Bei der Variation der Filter-Ordnung fällt auf, dass das Rauschen immer weniger wird und die Stimme sich immer
+        tiefer anhört.</br>
+        Bei der Variation der Framebreiten fällt auf, dass das Rauschen bei 50 ms immer weniger wird und bei 100 ms
+        stark zunimmt.</br>
+        Die Sprachverständlichkeit ist immer gegeben, jedoch ist eine zu hohe Framebreite und zu niedrige Filterordnung
+        nicht zu
+        empfehlen. </br>
+    </p>
+
+    <br><b style="font-size:24px"> Aufgabe 4.4 Variation der Quelle</b>
+    <p class="aufgabe">
+        Nun wollen wir die Anregung (Quelle) verändern. Dafür habe ich zwei Signale bereitgestellt, weißes Rauschen
+        und einen 100Hz-Pulse Train,</br>
+        einen obertonreiches Signal mit Grundfrequenz 100Hz.</br>
+        Wenn wir das Rauschen mit dem LPC-Objekt filtern, bekommen wir so etwas wie Flüstersprache, beim Pulse Train
+        </br>
+        eine Roboterstimme. Abschließend werden wir auch noch eine Musikdatei als Anregung benutzen, was einen
+        Vocodereffekt bewirken sollte. </br>
+        Am besten eignen sich hier flächige, eher statische Sounds wie Synthesizerakkorde, da der Rhythmus vom
+        Sprachsignal kommen soll.</br>
+    </p>
+
+    <table style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th>Pulse Train</th>
+            <th>Noise</th>
+            <th>Vocoder</th>
+        </tr>
+        <tr>
+            <td>Fatih</td>
+            <td><img src="../ueb4/pt.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/wn.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/vo.png" alt="Aufnahme" width="750" height="700"></td>
+        </tr>
+        <tr>
+            <td>Audio</td>
+            <td><audio controls>
+                    <source src="../ueb4/pulstrain16_25.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/whitenoise16_25.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/sirene16_25.wav" type="audio/wav">
+                </audio></td>
+        </tr>
+        <tr>
+            <td>Mehmet</td>
+            <td><img src="../ueb4/mehmetPT.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/mehmetWN_16_25.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/MehmetVo.png" alt="Aufnahme" width="750" height="700"></td>
+        </tr>
+        <tr>
+            <td>Audio</td>
+            <td><audio controls>
+                    <source src="../ueb4/mehmetPT_16_25.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/mehmetWN_16_25.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/mehmetVo_16_25.wav" type="audio/wav">
+                </audio></td>
+        </tr>
+        <tr>
+            <td>Taher</td>
+            <td><img src="../ueb4/taherPT.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/taherWN.png" alt="Aufnahme" width="750" height="700"></td>
+            <td><img src="../ueb4/taherSirene.png" alt="Aufnahme" width="750" height="700"></td>
+        </tr>
+        <tr>
+            <td>Audio</td>
+            <td><audio controls>
+                    <source src="../ueb4/taherPT_16_25.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/taherWN_16_25.wav" type="audio/wav">
+                </audio></td>
+            <td><audio controls>
+                    <source src="../ueb4/taherSirene_16_25.wav" type="audio/wav">
+                </audio></td>
+        </tr>
+    </table>
+</body>
+
+</html>

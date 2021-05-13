@@ -1,0 +1,306 @@
+<html>
+
+<head>
+        <meta charset="utf-8" />
+        <title>Übung 1</title>
+        <link rel="stylesheet" type="text/css" href="format.css">
+        <style type="text/css">
+                code {
+                        font-family: monospace;
+                        white-space: pre;
+                }
+
+                < !-- a:link {
+                        font-family: Arial;
+                        font-size: 10pt;
+                        text-decoration: none;
+                }
+
+                a:visited {
+                        font-family: Arial;
+                        font-size: 10pt;
+                        text-decoration: none;
+                }
+
+                a:hover {
+                        color: #FF3333;
+                        text-decoration: none;
+                        font-weight: normal;
+                        font-size: 10pt;
+                }
+
+                //
+                -->
+        </style>
+</head>
+
+<body>
+
+        <iframe src="oben.html" width="800" height="120" name="IFrame3" id="IFrame3" scrolling="no" frameborder="0">
+                <p>Ihr Browser kann leider keine eingebe5tteten Frames anzeigen:Sie k&ouml;nnen die eingebettete Seite
+                        &uuml;ber den
+                        folgenden.</p>
+        </iframe>
+
+        <h2>&Uuml;bung 1</h2>
+        <h3>Parameter:<br>
+                f1=500 Hz, f2=1000 Hz, f3= 3000 Hz<br>
+                A1= 1, A2=0,5 , A3= 0,5<br>
+                phi1=0, phi2=-pi/2, phi3=pi/2<br>
+                Vokal 1= A Vokal 2= I
+        </h3>
+        <h3>Aufgabe 1 - 1.1</h3>
+        In dieser Übung geht es um die Fouriersynthese und -analyse. Erzeuge mit Matlab/Octave ein Sinusgemisch mit
+        den<br>
+        folgenden Eigenschaften (f: Frequenz, A: Amplitude, phi Phasenwinkel), die jeder Übungsgruppe gesondert<br>
+        zugewiesen werden: f1, A1, phi1 - f2, A2, phi2 - f3, A3, phi3 und einer Dauer von 5 s. Zeichne das
+        Sinusgemisch<br>
+        mit plot im Bereich t=0-20ms. Dabei soll auf der x-Achse die Zeit in ms abgetragen sein. Stelle in deiner<br>
+        Abbildung (a) jede einzelne Schwingung und auch (b) die Summe der drei Schwingungen dar.<br>
+        Gib die Schwingung als Wave-Datei mit audiowrite aus, und zwar mit einer Abtastfrequenz<br>
+        fa von 16kHz und einer Auflösung von 16bit. Dabei skalieren, um Clipping zu vermeiden.<br>
+
+        <h3>Sinus 1; Sinus 2 und Sinus 3</h3>
+        <div style="margin-left:10px">
+                <td><img src="../ueb1/pics/scaled/teilaufgabe_1_a.png" 200w></td>
+        </div>
+
+        <h3>Sinus FFT</h3>
+        <div style="margin-left:10px">
+                <td><img src="../ueb1/pics/scaled/SinusFFT.png" 200w></td>
+        </div>
+
+        <h3>Sinus Summe Audio Datei</h3>
+        <audio controls>
+                <source src="../ueb1/audio/SinusSumme.wav" type="audio/wav">
+        </audio><br>
+        <h3>Analyse der Sinus Schwingung</h3>
+        <p>Bei der Betrachtung der FFT des Sinusgemischs sind folgende Beobachtungen zu entnehmen:
+        Die Signale (in diesem Experiment handelt es sich um Sinusschwingungen) sind aufgrund der Abtastung gespiegelt dargestellt. Dies entspricht einer Fortsetzung des Signals im Frequenzbereich durch Faltung des Signals mit der Abtastfrequenz.
+        Die Signale sind als 3, bzw. 6 mit der impliziten Spiegelung der dargestellten Amplituden zu erkennen. Jede der Amplituden steht repräsentativ für eines der Signale die im Sinusgemisch vorkommen.
+        Da es sich um ein diskretes Signal handelt, sind keine Oberwellen vorhanden. Anders als bei einem aufgenommenen Audiosignal, in dem viele Oberwellen vorkommen können.
+        Bei der Betrachtung der unterschiedlichen Framelängen ist erkennbar, dass durch die Fouriertransformation eine Addition der Amplituden stattfindet. Je länger die Framelänge, desto höher werden die Amplituden der Signale, da diese häufiger aufaddiert werden.
+        Ebenfalls zu entnehmen ist, dass die Amplituden mit dem Verhältnis der ursprünglich definierten Amplituden der Signale korrespondieren. Das zweite Signal weist die doppelte Amplitude des erste Signals auf und das dritte Signal die doppelte Amplitude des zweiten Signals.</p>
+
+        <h3>Aufgabe 1 - 1.2</h3>
+        Variiere dabei die Framelänge zwischen 50ms, 100ms, 500ms, 1 s und 5 s. <br>
+        Welche Frequenzauflösung delta f erhältst du für die verschiedenen Framelängen? <br>
+        Zoome nun in den Bereich 0 bis 4 kHz hinein. Was fällt beim Spektrum bei der Variation <br>
+        der Framelänge auf? Wie kann man sich diesen Unterschied erklären?<br>
+        </div>
+        <h3>Framelängen</h3>
+        <div style="margin-left:10px">
+                <td><img src="../ueb1/pics/scaled/Sinusgemisch_fft.png" 200w></td>
+        </div>
+
+        <br>
+        <h3>Aufgabe 1 - 1.3</h3>
+        <br>
+        Nimm nun in Praat den Vokal ‚a‘ und den Vokal ‚i‘ mit 16kHz mono auf, und zwar für jedes Gruppenmitglied.<br>
+        Achte darauf, dass am Anfang der Datei und am Ende keine Pausen bleiben, <br>
+        d.h, die Datei soll gleich mit dem Sprachsignal beginnen.<br>
+        Lies die Datei mit wavread in deinem Matlab-Programm ein. <br>
+        Berechne auch von diesem Signal die Fouriertransformation, diesmal mit Framebreiten von 50ms, 100ms, 500ms, 1
+        s.<br>
+        Wie unterscheiden sich die Vokale in ihrem Spektrum vom Sinusgemisch und wie unterscheiden sie sich
+        voneinander?<br>
+        <br>
+        </p>
+
+        <br>
+        <h3>Fatih_a</h3>
+        <div style="margin-left:20px">
+                <td><img src="../ueb1/pics/scaled/Fatih_a.png" 200w></td>
+                <br>
+                <audio controls>
+                        <source src="../ueb1/audio/Fatih_a.wav" type="audio/wav"></audio>
+        </div>
+
+        <br>
+        <h3>Fatih_i</h3>
+        <div style="margin-left:20px">
+                <td><img src="../ueb1/pics/scaled/Fatih_i.png" 200w></td>
+                <br>
+                <audio controls>
+                        <source src="../ueb1/audio/Fatih_i.wav" type="audio/wav"></audio>
+        </div>
+
+        <br>
+        <h3>Mehmet_a</h3>
+        <div style="margin-left:20px">
+                <td><img src="../ueb1/pics/scaled/Mehmet_a.png" 200w></td>
+                <br>
+                <audio controls>
+                        <source src="../ueb1/audio/Mehmet_a.wav" type="audio/wav"></audio>
+        </div>
+
+        <br>
+        <h3>Mehmet_i</h3>
+        <div style="margin-left:20px">
+                <td><img src="../ueb1/pics/scaled/Mehmet_i.png" 200w></td>
+                <br>
+                <audio controls>
+                        <source src="../ueb1/audio/Mehmet_i.wav" type="audio/wav"></audio>
+        </div>
+
+        <br>
+        <h3>Taher_a</h3>
+        <div style="margin-left:20px">
+                <td><img src="../ueb1/pics/scaled/Taher_a.png" 200w></td>
+                <br>
+                <audio controls>
+                        <source src="../ueb1/audio/Taher_a.wav" type="audio/wav"></audio>
+        </div>
+
+        <br>
+        <h3>Taher_i</h3>
+        <div style="margin-left:20px">
+                <td><img src="../ueb1/pics/scaled/Taher_i.png" 200w></td>
+                <br>
+                <audio controls>
+                        <source src="../ueb1/audio/Taher_i.wav" type="audio/wav"></audio>
+        </div>
+
+        <br>
+        <h3>Analyse der Vokal Aufnahmen</h3>
+        <p>Bei der Betrachtung der FFT der Audiosignale (Audioaufnahmen) sind folgende Beobachtungen zu entnehmen:
+        Im Gegensatz zum Sinusgemisch weisen diese viele Oberwellen auf, die durch die natürliche Phonik, sowie Hintergrundrauschen erzeugt werden können.
+        Bei der Betrachtung der FFT der einzelnen Audioaufnahmen sind klare Unterschiede im Spektrum zu erkennen da die Stimmbänder eines Menschen individuell sehr stark voneinander abweichen können.</p>
+        <br>
+
+        <link rel="stylesheet"
+      href="styles/github.css">
+        <script src="./highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <u><b style="font-size:18px">Matlab code:</b></u>
+        <br>
+        <br>
+        <pre><code class="matlab"><meta author="MSP">
+                clc
+                clear workspace
+                close all
+
+                % Werte für unsere Gruppe
+                f1=500; % in Hz
+                f2=1000; % in Hz
+                f3=3000; % in Hz
+                A1=1;
+                A2=0.5;
+                A3=0.5;
+                phi1=0;
+                phi2=-pi/2;
+                phi3=pi/2;
+                %Vokal 1= A
+                %Vokal 2= I
+
+                %Teilaufgabe 1a
+                s1 = createPlotAndAudio(f1, A1, phi1, 1);
+                s2 = createPlotAndAudio(f2, A2, phi2, 2);
+                s3 = createPlotAndAudio(f3, A3, phi3, 3);
+
+                set(gcf, 'Position',  [100, 100, 800, 500])
+                saveas(gcf,strcat("pics/teilaufgabe_1_a.png"));
+                %Teilaufgabe 1b
+                sum = sinusSum(s1,s2,s3);
+
+                %Teilaufgabe 2
+                frameVariation(sum);
+
+                %Teilaufgabe 3
+                audioReader('audio/Fatih_a.wav', 'Fatih_a');
+                audioReader('audio/Fatih_a.wav', 'Fatih_i');
+                audioReader('audio/Mehmet_a.wav', 'Mehmet_a');
+                audioReader('audio/Mehmet_i.wav', 'Mehmet_i');
+                audioReader('audio/Taher_a.wav', 'Taher_a');
+                audioReader('audio/Taher_i.wav', 'Taher_i');</code></pre>
+        <pre>
+        <code>
+        function A_t = createPlotAndAudio(f,A, phi, i)
+                fa=16000;
+                Ta=1/fa; 
+                t=(0:Ta:5-Ta);
+                A_t=A*sin(2*pi*f*t+phi);
+                subplot(3,1,i)
+                plot(t,A_t); xlabel('t[s]'); ylabel('A(t)'); axis([0 0.02 -1 +1]);
+                audio_output_file_name = strcat('sinus', num2str(f));
+                file_format = 'Hz.wav';
+                audiofile = strcat('audio/',strcat(audio_output_file_name,file_format));
+                audiowrite(audiofile,A_t,fa);
+        end
+        </code>
+        </pre>
+        <pre>
+       <code>
+        function audioReader(wavePath, name)
+                [wavefile,fa] = audioread(wavePath);
+                v = [0.05,0.1,0.5,1];
+                f = figure('name',name,'NumberTitle','off');
+                for i=1:4
+                        subplot(2,2,i);
+                        N = v(i)*fa;
+                        doFFTAndPlot(wavefile,N);
+                        title("Framelänge:" + v(i) + "s");
+                end
+                saveas(f,strcat("pics/", strcat(name, ".png")));
+        end
+       </code>
+       </pre>
+        <pre>
+       <code>
+        function frameVariation(sum)
+                hold on;
+                freq = 16000;
+                times = [0.02,0.05,0.1,0.5,1,5];
+                f = figure('name','Sinusgemisch_fft','NumberTitle','off');
+                for i=1:6
+                        subplot(3,2,i);
+                        N = times(i)*freq;
+                        doFFTAndPlot(sum,N);
+                        title("Framelänge: " + times(i) + "s");
+                end
+                hold off;
+                saveas(f,"pics/Sinusgemisch_fft.png");
+        end
+       </code>
+       </pre>
+        <pre>
+       <code>
+        function doFFTAndPlot(signal, N)
+                Y = fft(signal, N);
+                plot(abs(Y));
+                xlabel("f in [Hz]");
+                ylabel("|Y(t)|");
+        end
+       </code>
+       </pre>
+        <pre>
+      <code>
+        function sum = sinusSum(s1, s2, s3)
+                fa = 16000;
+                delta_t = 5;
+                s_sum = s1+s2+s3;
+                s_sum = s_sum/max(abs(s_sum)); %auf +/- 1 skalieren  
+                Ta=1/fa;
+                t=(0:Ta:delta_t-Ta);
+                figure('name', 'Sinussumme')
+                subplot(2,1,1);
+                plot(t, s_sum);
+                xlim([0,20]);
+                axis([0 0.02 -1 +1]); xlabel('t[s]'); ylabel('A(t)');title('Sinussumme');
+                N = delta_t / Ta;
+                F_f = fft(s_sum, N);  % Fouriertransformation
+                delta_f = fa/N;
+                f = (0:delta_f:fa-delta_f);
+                subplot(2,1,2);
+                plot(f, abs(F_f)); title('Fouriertransformation der Sinusschwingung');
+                xlabel('f[Hz]'); ylabel('A(f)')
+                set(gcf, 'Position',  [100, 100, 800, 500])
+                saveas(gcf,strcat("pics/", 'SinusFFT.png'));
+                filename = 'audio/SinusSumme.wav';
+                audiowrite(filename,s_sum,fa,'BitsPerSample',16);
+                sum = s_sum;
+        end
+      </code>
+      </pre>
+</body>
+</html>

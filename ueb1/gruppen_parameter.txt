@@ -1,0 +1,5 @@
+f1=500 Hz, f2=1000 Hz, f3= 3000 Hz
+A1= 1, A2=0,5 , A3= 0,5
+phi1=0, phi2=-pi/2, phi3=pi/2
+Vokal 1= A
+Vokal 2= I

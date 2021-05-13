@@ -1,0 +1,476 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="format.css">
+    <style type="text/css">
+        p.code {
+            border-style: solid;
+            background-color: lightgrey;
+        }
+
+        p.aufgabe {
+            border-style: groove;
+            background-color: darkgray;
+            margin-left: 20px;
+        }
+
+        p.b {
+            border-style: groove;
+            background-color: wheat;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        < !-- a:link {
+            font-family: Arial;
+            font-size: 10pt;
+            text-decoration: none;
+        }
+
+        a:visited {
+            font-family: Arial;
+            font-size: 10pt;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #FF3333;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 10pt;
+        }
+
+        //-->
+    </style>
+</head>
+
+<body>
+
+    <iframe src="oben.html" width="800" height="120" name="IFrame3" id="IFrame3" scrolling="no" frameborder="0">
+        <p>Ihr Browser kann leider keine eingebe5tteten Frames anzeigen:Sie k&ouml;nnen die eingebettete Seite &uuml;ber
+            den
+            folgenden.</p>
+    </iframe>
+
+    <u>
+        <h1 style="font-size:32px; font-family:'Verdana'">Übung 6</h1>
+    </u>
+
+    <table style="width:100%">
+        <tr>
+            <th>Pflanze</th>
+            <th>Wand</th>
+        </tr>
+        <tr>
+            <td><img src="../ueb6/images/pflanze_original.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/images/wand_original.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+    </table>
+
+    <br><b style="font-size:24px"> Aufgabe 6.1a</b>
+    <p class="aufgabe">
+        Lies die Bilder ein und konvertiere sie zunächst mit der Funktion rgb2gray in Graustufenbilder. <br>
+        Erweitere das Skript nun so, dass ein Filter mit einem Kernel von 3x3 Pixeln angewandt werden kann:
+    </p>
+    <p class="aufgabe">
+        <link rel="stylesheet" href="styles/github.css">
+        <script src="./highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <u><b style="font-size:16px">Matlab code:</b></u>
+        <br>
+        <br>
+    <pre>
+    <code class="matlab"><meta author="MSP">
+        clc
+        clear workspace
+        close all
+
+        pathPflanze = 'images\pflanze_original.bmp';
+        pathWand = 'images\wand_original.bmp';
+        imagePflanze = imread(pathPflanze);
+        imageWand = imread(pathWand);
+
+        pPf_gray = rgb2gray(imagePflanze);
+        pWand_gray = rgb2gray(imageWand);
+        imwrite(pPf_gray,'result\pflanze_gray.bmp');
+        imwrite(pWand_gray,'result\wand_gray.bmp');
+
+        run(pPf_gray, 'pflanze');
+        run(pWand_gray, 'wand');
+
+        function run(gray, file)
+            H = [1 1 1; 1 1 1; 1 1 1]/9;
+            Y = filter2(H,gray,'full')/255;
+            figure
+            subplot(1,2,2);
+            imshow(Y);
+            title("nachher");
+            subplot(1,2,1);
+            imshow(gray);
+            title("vorher");
+            name = strcat('result\',file,'_weich', '.bmp');
+            imwrite(Y, name);
+        end
+        </code></pre>
+    </p>
+
+    <table style="width:100%">
+        <tr>
+            <th>Filter</th>
+            <th>Pflanze</th>
+            <th>Wand</th>
+        </tr>
+        <tr>
+            <td>Grau</td>
+            <td><img src="../ueb6/result/pflanze_gray.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/wand_gray.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+        <tr>
+            <td>Weich</td>
+            <td><img src="../ueb6/result/pflanze_weich.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/wand_weich.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+    </table>
+
+    <br><b style="font-size:24px"> Aufgabe 6.1c</b>
+    <p class="aufgabe">
+        Erweitere das Skript so, dass das Differenzbild zwischen dem gefilterten und dem Originalbild <br>
+        berechnet werden kann! Dieses muss offensichtlich die Information zeigen, die das Filter entfernt <br>
+        hat. Beachte dabei, dass du das Differenzbild in den Bereich 0-255 verschieben und möglicherweise <br>
+        im Kontrast verstärken musst (siehe Übung 6). <br>
+    </p>
+    <p class="aufgabe">
+        <link rel="stylesheet" href="styles/github.css">
+        <script src="./highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <u><b style="font-size:16px">Matlab code:</b></u>
+        <br>
+        <br>
+    <pre>
+    <code class="matlab"><meta author="MSP">
+        clc
+        clear workspace
+        close all
+
+        pathPflanze = 'images\pflanze_original.bmp';
+        pathWand = 'images\wand_original.bmp';
+        imagePflanze = imread(pathPflanze);
+        imageWand = imread(pathWand);
+
+        pPf_gray = rgb2gray(imagePflanze);
+        pWand_gray = rgb2gray(imageWand);
+
+        pflanze_weich = imread('result\pflanze_weich.bmp');
+        wand_weich = imread('result\wand_weich.bmp');
+
+        pflanze_weich = pflanze_weich(1:540,1:960);
+        wand_weich = wand_weich(1:540,1:960);
+
+        difference_pf = (pPf_gray - pflanze_weich);
+        difference_wand = (pWand_gray - wand_weich);
+
+        imshow(difference_pf);
+        imshow(difference_wand);
+
+        imwrite(difference_pf, 'result\pflanze_diff.bmp');
+        imwrite(difference_wand, 'result\wand_diff.bmp');
+
+        imwrite(difference_pf * 10, 'result\pflanze_kontrast.bmp');
+        imwrite(difference_wand * 10, 'result\wand_kontrast.bmp');
+        </code></pre>
+    </p>
+
+    <table style="width:100%">
+        <tr>
+            <th>Format</th>
+            <th>Pflanze</th>
+            <th>Wand</th>
+        </tr>
+        <tr>
+            <td>Weich</td>
+            <td><img src="../ueb6/result/pflanze_weich.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/wand_weich.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+        <tr>
+            <td>Differenz</td>
+            <td><img src="../ueb6/result/pflanze_diff.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/wand_diff.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+        <tr>
+            <td>Kontrast</td>
+            <td><img src="../ueb6/result/pflanze_kontrast.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/wand_kontrast.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+    </table>
+
+    <br><b style="font-size:24px"> Aufgabe 6.2</b>
+    <p class="aufgabe">
+        a) Wende nun den folgenden 3*3 Kernel auf deine Bilder an! Beachte dabei, dass bei der Anwendung <br>
+        der Vorschrift Werte < 0 oder> 255 entstehen können und entsprechend behandelt werden müssen! <br>
+            <br>
+            b) Berechne wiederum das Differenzbild zwischen dem gefilterten und dem Originalbild! Beachte <br>
+            dabei ebenfalls, dass du das Differenzbild möglicherweise im Kontrast verstärken musst. <br>
+    </p>
+    <p class="aufgabe">
+        <link rel="stylesheet" href="styles/github.css">
+        <script src="./highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <u><b style="font-size:16px">Matlab code:</b></u>
+        <br>
+        <br>
+    <pre>
+    <code class="matlab"><meta author="MSP">
+        clc
+        clear workspace
+        close all
+
+        pathPflanze = 'images\pflanze_original.bmp';
+        pathWand = 'images\wand_original.bmp';
+        imagePflanze = imread(pathPflanze);
+        imageWand = imread(pathWand);
+
+        pPf_gray = rgb2gray(imagePflanze);
+        pWand_gray = rgb2gray(imageWand);
+
+        H = [0 -2 0; -2 12 -2; 0 -2 0];
+
+        Y1 = filter2(H,pPf_gray/255,'full');
+        Y2 = filter2(H,pWand_gray/255,'full');
+
+        imwrite(Y1 /4, 'result\gradientenfilter_pflanze.bmp');
+        imwrite(Y2 /4, 'result\gradientenfilter_wand.bmp');
+
+        Y1 = Y1(1:540,1:960) *40;
+        Y2 = Y2(1:540,1:960) *40;
+        % Muss angepasst werden
+
+        double_pf = im2double(pPf_gray);
+        double_wand = im2double(pWand_gray);
+
+        im1 = double_pf - Y1;
+        im2 = double_wand - Y2;
+        imwrite(im1, 'result\gradientenfilter_kontrast_pflanze.bmp');
+        imwrite(im2, 'result\gradientenfilter_kontrast_wand.bmp');
+
+        figure
+        imshow(im1);
+        figure
+        imshow(im2);
+        </code></pre>
+    </p>
+
+    <table style="width:100%">
+        <tr>
+            <th>Gradient</th>
+            <th>Pflanze</th>
+            <th>Wand</th>
+        </tr>
+        <tr>
+            <td>Gradientenfilter</td>
+            <td><img src="../ueb6/result/gradientenfilter_pflanze.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/gradientenfilter_wand.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+        <tr>
+            <td>Gradientenfilter Kontrast</td>
+            <td><img src="../ueb6/result/gradientenfilter_kontrast_pflanze.bmp" alt="Aufnahme" width="960" height="540">
+            </td>
+            <td><img src="../ueb6/result/gradientenfilter_kontrast_wand.bmp" alt="Aufnahme" width="960" height="540">
+            </td>
+        </tr>
+    </table>
+
+    <br><b style="font-size:24px"> Aufgabe 6.3</b>
+    <p class="aufgabe">
+        Die DCT transformiert ein Pixelbild in seine Ortsfrequenzen. Berechne die DCT für deine beiden <br>
+        Bilder, indem du das komplette Bild nach Anwendung von rgb2gray mit der Funktion dct2 in den <br>
+        Ortsfrequenzbereich transformierst und stelle die DCT-Koeffizienten wieder als Graustufenbild dar. <br>
+        Dazu müssen die Werte der DCT-Koeffizienten ggf. skaliert und wieder in den Bereich von 0 bis 255 <br>
+        verschoben werden. <br>
+    </p>
+    <p class="aufgabe">
+        <link rel="stylesheet" href="styles/github.css">
+        <script src="./highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <u><b style="font-size:16px">Matlab code:</b></u>
+        <br>
+        <br>
+    <pre>
+    <code class="matlab"><meta author="MSP">
+        clc
+        clear workspace
+        close all
+
+        pathPflanze = 'images\pflanze_original.bmp';
+        pathWand = 'images\wand_original.bmp';
+        imagePflanze = imread(pathPflanze);
+        imageWand = imread(pathWand);
+
+        pPf_gray = rgb2gray(imagePflanze);
+        pWand_gray = rgb2gray(imageWand);
+
+        dct_pflanze = dct2(pPf_gray)/255;
+        dct_wand = dct2(pWand_gray)/255;
+
+        s1 = size(dct_pflanze);
+        pf_height = s1(1);
+        pf_width = s1(2);
+
+        s2 = size(dct_wand);
+        wand_height = s2(1);
+        wand_width = s2(2);
+
+        mod_dct_pflanze = zeros(pf_height, pf_width);
+        mod_dct_wand = zeros(wand_height, wand_width);
+
+        for rP = 1:pf_height
+        for cP = 1:pf_width
+            if dct_pflanze(rP, cP) < 0
+            continue;
+            elseif dct_pflanze(rP, cP) > 255
+            mod_dct_pflanze(rP, cP) = 255;
+            else
+            mod_dct_pflanze(rP, cP) = dct_pflanze(rP, cP);
+            end
+        end  
+        end
+
+        for rM = 1:wand_height
+        for cW = 1:wand_width
+            if dct_wand(rM, cW) < 0
+            continue;
+            elseif dct_wand(rM, cW) > 255
+            mod_dct_wand(rM, cW) = 255;
+            else
+            mod_dct_wand(rM, cW) = dct_wand(rM, cW);
+            end
+        end  
+        end
+
+        figure
+        imshow(mod_dct_pflanze);
+        imwrite(dct_pflanze,'result\dct_pflanze.bmp');
+        figure
+        imshow(mod_dct_wand);
+        imwrite(dct_wand,'result\dct_wand.bmp');
+        </code></pre>
+    </p>
+
+    <table style="width:100%">
+        <tr>
+            <th>Pflanze</th>
+            <th>Wand</th>
+        </tr>
+        <tr>
+            <td><img src="../ueb6/result/dct_pflanze.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/dct_wand.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+    </table>
+
+    <br><b style="font-size:24px"> Aufgabe 6.3 idct</b>
+    <p class="aufgabe">
+        Erkläre das Aussehen des Bildes der Transformation an Hand der Strukturen in deinen Bildern. Nun<br>
+        setze im Ergebnis der DCT, d.h. der Matrix der DCT-Koeffizienten, Werte mit einem Index (x,y)<br>
+        a) > (128,128)<br>
+        b) > (64,64)<br>
+        c) > (16,16) auf 0 und transformiere die modifizierte Matrix der DCT Koeffizienten wieder in den<br>
+        Pixelbereich, indem du idct2 verwendest. Wie verändert sich dein ursprüngliches Bild? Erkläre,<br>
+        0 -2 0<br>
+        -2 12 -2<br>
+        0 -2 0<br>
+        was die genannte Operation prinzipiell für einen Effekt hat, indem du die Bedeutung der DCT<br>
+        Koeffizienten interpretierst.<br>
+    </p>
+    <p class="aufgabe">
+        <link rel="stylesheet" href="styles/github.css">
+        <script src="./highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <u><b style="font-size:16px">Matlab code:</b></u>
+        <br>
+        <br>
+    <pre>
+    <code class="matlab"><meta author="MSP">
+        clc
+        clear workspace
+        close all
+
+        pathPflanze = 'result\dct_pflanze.bmp';
+        pathWand = 'result\dct_wand.bmp';
+
+        dct_pf = imread(pathPflanze);
+        dct_wand = imread(pathWand);
+
+        run(16, dct_pf, 'pflanze', dct_wand, 'wand');
+        run(64, dct_pf, 'pflanze', dct_wand, 'wand');
+        run(128, dct_pf, 'pflanze', dct_wand, 'wand');
+
+        function run(gr, image1, file1, image2, file2)
+            s1 = size(image1);
+            pf_height = s1(1);
+            pf_width = s1(2);
+
+            s2 = size(image2);
+            wand_height = s2(1);
+            wand_width = s2(2);
+            for rP = 1:pf_height
+            for cP = 1:pf_width
+                if image1(rP, cP) > gr
+                image1(rP, cP) = 0;
+                end
+            end  
+            end
+
+            for rM = 1:wand_height
+            for cW = 1:wand_width
+                if image2(rM, cW) > gr
+                image2(rM, cW) = 0;
+                end
+            end 
+            end
+
+            idct_pflanze = idct2(image1/255);
+            name1 = strcat('result\idct_', file1,'_',int2str(gr),'.bmp');
+            imwrite(idct_pflanze, name1);
+            idct_wand = idct2(image2/255);
+            name2 = strcat('result\idct_', file2,'_',int2str(gr),'.bmp');
+            imwrite(idct_wand, name2);
+        end
+        </code></pre>
+    </p>
+
+    <table style="width:100%">
+        <tr>
+            <th>Format</th>
+            <th>Pflanze</th>
+            <th>Wand</th>
+        </tr>
+        <tr>
+            <td>(128,128)</td>
+            <td><img src="../ueb6/result/idct_pflanze_128.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/idct_wand_128.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+        <tr>
+            <td>(64,64)</td>
+            <td><img src="../ueb6/result/idct_pflanze_64.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/idct_wand_64.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+        <tr>
+            <td>(16,16)</td>
+            <td><img src="../ueb6/result/idct_pflanze_16.bmp" alt="Aufnahme" width="960" height="540"></td>
+            <td><img src="../ueb6/result/idct_wand_16.bmp" alt="Aufnahme" width="960" height="540"></td>
+        </tr>
+    </table>
+</body>
+
+</html>

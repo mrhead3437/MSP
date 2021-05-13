@@ -1,0 +1,6 @@
+Unter Zuhilfenahme der Bilder ist anhand der Histogramme deutlich zu erkenne, wie
+die Verteilung der Helligkeitswerte sind. Da das Graustufenbild mit der Pflanze 
+einen geringen Weisanteil besitzt und die Farbwerte relativ gleichmäßig verteilt sind
+tendieren die Graustufenwerte eher konstant über das Diagramm zu sein. 
+Im Gegenzug ist bei dem Bild mit dem Möbelstück, sehr viel Weisanteil 
+vorhanden und deshalb die Graustufenwerte eher nach rechts ausfallen. 

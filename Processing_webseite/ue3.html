@@ -1,0 +1,583 @@
+<html>
+
+<head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="format.css">
+        <style type="text/css">
+                p.aufgabe {
+                        border-style: groove;
+                        background-color: darkgrey;
+                        margin-left: 20px;
+                }
+
+                p.b {
+                        border-style: groove;
+                        background-color: lightgrey;
+                        margin-left: 30px;
+                }
+
+                table,
+                th,
+                td {
+                        border: 1px solid black;
+                }
+
+                th,
+                td {
+                        padding: 15px;
+                        text-align: center;
+                }
+
+                < !-- a:link {
+                        font-family: Arial;
+                        font-size: 10pt;
+                        text-decoration: none;
+                }
+
+                a:visited {
+                        font-family: Arial;
+                        font-size: 10pt;
+                        text-decoration: none;
+                }
+
+                a:hover {
+                        color: #FF3333;
+                        text-decoration: none;
+                        font-weight: normal;
+                        font-size: 10pt;
+                }
+
+                //-->
+        </style>
+</head>
+
+<body>
+
+        <iframe src="oben.html" width="800" height="120" name="IFrame3" id="IFrame3" scrolling="no" frameborder="0">
+                <p>Ihr Browser kann leider keine eingebe5tteten Frames anzeigen:Sie k&ouml;nnen die eingebettete Seite
+                        &uuml;ber den
+                        folgenden.</p>
+        </iframe>
+
+        <u>
+                <h1 style="font-size:32px; font-family:'Verdana'">Übung 3</h1>
+        </u>
+
+
+        <br><b style="font-size:24px"> Aufgabe 3 - 1 Histogramm</b>
+        <br><h3>Satz:</h3> "Ein Histogramm ist eine grafische Darstellung der Häufigkeitsverteilung kardinalskalierter Merkmale."
+        <br>
+        <h3>Fatih</h3>
+        <td><audio controls>
+                        <source src="../ueb3/Satz_fatih.wav" type="audio/wav"></audio></td>
+                                <br>
+        <br>
+        <h3>Mehmet</h3>
+        <td><audio controls>
+                        <source src="../ueb3/Satz_mehmet.wav" type="audio/wav"></audio></td>
+                                <br>
+        <br>
+        <h3>Taher</h3>
+        <td><audio controls>
+                        <source src="../ueb3/Satz_taher.wav" type="audio/wav"></audio></td>
+        <br>
+        <img src="../ueb3/ueb3.png" alt="Aufnahme" width="875" height="656">
+        <br>
+        <link rel="stylesheet" href="styles/github.css">
+        <script src="./highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <u><b style="font-size:18px"><br>Matlab code:</b></u>
+        <br>
+        <br>
+        <pre><code class="matlab"><meta author="MSP">
+                clc
+                clear workspace
+                close all
+
+                y1 = audioread('Satz_fatih.wav');
+                y2 = audioread('Satz_mehmet.wav');
+                y3 = audioread('Satz_taher.wav');
+
+                [counts1,Rey1] = hist(y1,25);
+                [counts2,Rey2] = hist(y2,25);
+                [counts3,Rey3] = hist(y3,25);
+
+                figure
+                bar(Rey1,counts1.*100./sum(counts1),'g');
+                hold on
+                bar(Rey2,counts2.*100./sum(counts2), 'r');
+                hold on
+                bar(Rey3,counts3.*100./sum(counts3), 'b');
+
+                title('Sprachsignal');
+                xlabel ("Amplituden-Wertebereiche");
+                ylabel ("Prozentangabe");
+                saveas(gcf,strcat("ueb3.png"));
+        </code></pre>
+        <br><b style="font-size:24px"> Aufgabe 3 - 2 Phoneme</b>
+        <p class="aufgabe">
+                Phoneme sind die kleinsten bedeutungsunterscheidenden Elemente einer Sprache. </b>
+                In dieser Übung werden wir sogenannte Minimalpaare, d.h. Wörter, die sich genau in einem </b>
+                Phonem unterscheiden, suchen, diese aufzeichnen und die Oszillogramme, d.h. die Zeitsignale,</b>
+                segmentieren und vergleichen. Genaugenommen sind es nicht immer Minimalpaare, sondern oft </b>
+                Tripel und Quadrupel etc. die sich jeweils an einer Stelle unterscheiden</b>
+                </b>
+                (a) einsilbig mit wechselndem Vokal: CVC (insgesamt fünf verschiedene)</b>
+                (b) zweisilbig mit wechselndem Konsonanten: VCV (insgesamt fünf verschiedene)</b>
+        </p>
+        <br>
+        <br>
+        <h3>a) CVC</h3>
+
+        <table style="width:100%">
+                <tr>
+                        <th> Wort:</th>
+                        <th>Transkription</th>
+                        <th>Aufnahme Fatih</th>
+                        <th>Aufnahme Mehmet</th>
+                        <th>Aufnahme Taher</th>
+                </tr>
+                <tr>
+                        <td>Back</td>
+                        <td>bak</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_cvc/back_cvc_fatih.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_cvc/back_cvc_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_cvc/back_cvc_taher.wav" type="audio/wav"></audio>
+                        </td>
+                </tr>
+                <tr>
+                        <td>Bok</td>
+                        <td>bo:k</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_cvc/bok_cvc_fatih.wav" type="audio/wav"></audio></td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_cvc/bok_cvc_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_cvc/bok_cvc_taher.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                        <td>Buk</td>
+                        <td>bu:k</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_cvc/buk_cvc_fatih.wav" type="audio/wav"></audio></td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_cvc/buk_cvc_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_cvc/buk_cvc_taher.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                        <td>Bik</td>
+                        <td>bi:k</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_cvc/bik_cvc_fatih.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_cvc/bik_cvc_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_cvc/bik_cvc_taher.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                        <td>Bock</td>
+                        <td>bOk</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_cvc/bock_cvc_fatih.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_cvc/bock_cvc_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_cvc/bock_cvc_taher.wav" type="audio/wav"></audio>
+                        </td>
+                </tr>
+        </table>
+        </br>
+        <table>
+                <tr>
+                        <th>Name:</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                </tr>
+                <tr>
+                        <td>Fatih</td>
+                        <td><img src="../ueb3/fatih_cvc/fatih_back.png" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/fatih_cvc/fatih_bok.png" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/fatih_cvc/fatih_buk.png" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/fatih_cvc/fatih_bik.png" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/fatih_cvc/fatih_bock.png" alt="Aufnahme" width="850" height="700"></td>
+                </tr>
+                <tr>
+                        <td>Mehmet</td>
+                        <td><img src="../ueb3/mehmet_cvc/mehmet_back.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/mehmet_cvc/mehmet_bok.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/mehmet_cvc/mehmet_buk.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/mehmet_cvc/mehmet_bik.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/mehmet_cvc/mehmet_bock.PNG" alt="Aufnahme" width="850" height="700"></td>
+                </tr>
+                <tr>
+                        <td>Taher</td>
+                        <td><img src="../ueb3/taher_cvc/taher_back.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/taher_cvc/taher_bok.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/taher_cvc/taher_buk.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/taher_cvc/taher_bik.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/taher_cvc/taher_bock.PNG" alt="Aufnahme" width="850" height="700"></td>
+                </tr>
+        </table>
+        </br>
+        <h3>b) VCV</h3>
+        <table style="width:100%">
+                <tr>
+                        <th> Wort:</th>
+                        <th>Transkription</th>
+                        <th>Aufnahme Fatih</th>
+                        <th>Aufnahme Mehmet</th>
+                        <th>Aufnahme Taher</th>
+                </tr>
+                <tr>
+                        <td>"ale" von Schale</td>
+                        <td>a:l@</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_vcv/ale_vcv_fatih.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_vcv/ale_vcv_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_vcv/ale_vcv_taher.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                        <td>Ahne</td>
+                        <td>a:n@</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_vcv/ahne_vcv_fatih.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_vcv/ahne_vcv_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_vcv/ahne_vcv_taher.wav" type="audio/wav"></audio>
+                        </td>
+                </tr>
+                <tr>
+                        <td>Ase</td>
+                        <td>a:z@</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_vcv/ase_vcv_fatih.wav" type="audio/wav"></audio></td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_vcv/ase_vcv_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_vcv/ase_vcv_taher.wav" type="audio/wav"></audio></td>
+                </tr>
+                <tr>
+                        <td>Arde</td>
+                        <td>aRd@</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_vcv/arde_vcv_fatih.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_vcv/arde_vcv_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_vcv/arde_vcv_taher.wav" type="audio/wav"></audio>
+                        </td>
+                </tr>
+                <tr>
+                        <td>Ake</td>
+                        <td>a:k@</td>
+                        <td><audio controls>
+                                        <source src="../ueb3/fatih_vcv/ake_vcv_fatih.wav" type="audio/wav"></audio></td>
+                        <td><audio controls>
+                                        <source src="../ueb3/mehmet_vcv/ake_vcv_mehmet.wav" type="audio/wav"></audio>
+                        </td>
+                        <td><audio controls>
+                                        <source src="../ueb3/taher_vcv/ake_vcv_taher.wav" type="audio/wav"></audio></td>
+                </tr>
+        </table>
+        <table>
+                <tr>
+                        <th>Name:</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                </tr>
+                <tr>
+                        <td>Fatih</td>
+                        <td><img src="../ueb3/fatih_vcv/ale_fatih.png" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/fatih_vcv/ahne_fatih.png" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/fatih_vcv/ase_fatih.png" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/fatih_vcv/arde_fatih.png" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/fatih_vcv/ake_fatih.png" alt="Aufnahme" width="850" height="700"></td>
+                </tr>
+                <tr>
+                        <td>Mehmet</td>
+                        <td><img src="../ueb3/mehmet_vcv/ale_mehmet.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/mehmet_vcv/ahne_mehmet.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/mehmet_vcv/ase_mehmet.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/mehmet_vcv/arde_mehmet.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/mehmet_vcv/ake_mehmet.PNG" alt="Aufnahme" width="850" height="700"></td>
+                </tr>
+                <tr>
+                        <td>Taher</td>
+                        <td><img src="../ueb3/taher_vcv/ale_taher.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/taher_vcv/ahne_taher.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/taher_vcv/ase_taher.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/taher_vcv/arde_taher.PNG" alt="Aufnahme" width="850" height="700"></td>
+                        <td><img src="../ueb3/taher_vcv/ake_taher.PNG" alt="Aufnahme" width="850" height="700"></td>
+                </tr>
+        </table>
+        </p>
+        <p class="aufgabe">Frage: </br>
+                In welchen Merkmalen unterscheiden sich die von euch gewählten Konsonanten und wie drücken sich diese
+                im Oszillogramm und Spektrogramm aus? </b>
+        </p>
+
+        <p class="b">Antwort:</br>
+                Im Oszillogramm kann man Frequenzveränderung in der Zeit erkennen.</br>
+                durch die Fourier-Analyse kann man ermitteln, wie stark einzelne Frequenzen in einem bestimmten
+                Signalstück vorhanden sind.</br>
+                Dabei werden die einzelnen Sinussignale ermittelt, die im komplexen Signal aufaddiert wurden.</br>
+                Ein Signalstück liefert dabei ein Spektrum, mehrere Spektra hintereinander liefern ein
+                Spektrogramm.</br>
+                Im Spektrogramm werden drei Dimensionen angezeigt:</br>
+                - x-Achse:Zeit</br>
+                - y-Achse:Frequenz</br>
+                - Farbe(hellvs.dunkel):Energiestärke</br>
+                - das Spektrum zeigt nur Frequenzstärken für einen einzelnen Zeitabschnitt</br>
+                - das Spektrogramm zeigt dagegen die Veränderung der Frequenzstärke in der Zeit</br>
+        </p>
+
+        <p class="aufgabe">Frage: </br>
+                In welchem Frequenzbereich befindet sich z.B. die meiste Energie?</br>
+        </p>
+
+        <p class="b">Antwort:</br>
+                Komplexe Signale kann man dadurch unterscheiden, wie stark einzelne Frequenzen vorhanden sind.</br>
+                Charakteristische Frequenzbereiche mit viel Energie sind die Formanten.</br>
+        </p>
+
+        <p class="aufgabe">Frage: </br>
+                Welche Artikulationsart, bzw. - stelle bezeichnet die von euch gewählten Konsonanten?</br>
+        </p>
+
+        <p class="b">Antwort:</br>
+                Frequenzbereiche mit wenig Energie.
+        </p>
+
+        <p class="aufgabe">Frage: </br>
+                Wie unterscheiden sich die von euch gewählten Vokale (Zungenposition, Länge -> ausmessen,
+                Lippenrundung +/-)? </br>
+        </p>
+
+        <p class="b">Antwort:</br>
+                Der Artikulationsapparat bildet ein System von Röhren (Larynx, Bereich vor und hinter Zunge etc.) mit
+                verschiedenen Resonanzfrequenzen.</br>
+                Wenn Luft durch den Artikulationsapparat strömt, wird die Luft in jedem Resonanzraum angeregt, wobei
+                jede Röhre mehrere Resonanzfrequenzen hat.</br>
+                Grobe Klassifikation der Vokale:</br>
+                • alle Vokale haben F0</br>
+                • hohe Vokale: niedrige F1</br>
+                • tiefe Vokale: hohe F1</br>
+                • vordere Vokale: hohe F2</br>
+                • hintere Vokale: niedrige F2</br>
+        </p>
+
+        <p class="aufgabe">Frage: </br>
+                Vergleicht die Oszillogramme/Spektrogramme verschiedener Sprecher, ähneln sich diese für den gleichen
+                Laut?</br>
+        </p>
+
+        <p class="b">Antwort:</br>
+                Die Intensitäten der Formanten (gelb) sin sich ähnlich. Das Spektogramm kann unteranderem etwas
+                unterschiedlich sein. </br>
+        </p>
+
+
+        <br><b style="font-size:24px"> Aufgabe 3 - 2 Formanten</b>
+        <p class="aufgabe">
+                Die Bereiche hoher spektraler Energie eines Lauts bezeichnet man auch als "Formanten". </b>
+                Speziell die Vokale lassen sich relativ gut durch ihren 1. und 2. Formanten, kurz F1 und F2 genannt,
+                beschreiben. </b>
+                Das sind die Mittenfrequenzen des ersten und zweiten Energieschwerpunkts, die man in PRAAT als
+                Kurvenzüge über der </b>
+                Zeit darstellen lassen kann.Bei der Messung der Vokalformanten nimmt man sinnvollerweise als Ort der
+                Messung die Lautmitte. </b>
+                Die folgende Tabelle gibt zur Orientierung die Formantfrequenzen einiger deutscher Vokale wieder.
+                Hierbei handelt es sich </b>
+                um Mittelwerte, die über eine große Anzahl von Sprechern gemessen wurden. Die Aufgabe </b>
+                Formantkarten zu bestimmen. Dazu komplettieren wir die Vokale, die in den Beispielen aus Übung 3.2 noch
+                fehlten, messen die </b>
+                Formantfrequenzen und tragen sie in ein Koordinatensystem ein.
+        </p>
+
+        <br>
+        <h3>CVC von Fatih</h3>
+        <table style="width:100%">
+
+                <tr>
+                        <th>Fatih</th>
+                        <th>Mehmet</th>
+                        <th>Taher</th>
+                </tr>
+
+                <tr>
+                        <td>
+                                <table style="width:100%">
+                                        <tr>
+                                                <th> Vokal</th>
+                                                <th>F1 [Hz]</th>
+                                                <th>F2 [Hz]</th>
+                                        </tr>
+                                        <tr>
+                                                <td>a</td>
+                                                <td>634</td>
+                                                <td>1241</td>
+                                        </tr>
+                                        <tr>
+                                                <td>o:</td>
+                                                <td>224</td>
+                                                <td>597</td>
+                                        </tr>
+                                        <tr>
+                                                <td>u:</td>
+                                                <td>301</td>
+                                                <td>616</td>
+                                        </tr>
+                                        <tr>
+                                                <td>i:</td>
+                                                <td>358</td>
+                                                <td>2391</td>
+                                        </tr>
+                                        <tr>
+                                                <td>O</td>
+                                                <td>654</td>
+                                                <td>2232</td>
+                                        </tr>
+                                        <tr>
+                                                <td>a:</td>
+                                                <td>645</td>
+                                                <td>1074</td>
+                                        </tr>
+                                        <tr>
+                                                <td>@</td>
+                                                <td>816</td>
+                                                <td>1676</td>
+                                        </tr>
+                </tr>
+                </td>
+        </table>
+        </td>
+
+        <td>
+                <table style="width:100%">
+                        <tr>
+                                <th> Vokal</th>
+                                <th>F1 [Hz]</th>
+                                <th>F2 [Hz]</th>
+                        </tr>
+                        <tr>
+                                <td>a</td>
+                                <td>738</td>
+                                <td>1246</td>
+                        </tr>
+                        <tr>
+                                <td>o:</td>
+                                <td>522</td>
+                                <td>2112</td>
+                        </tr>
+                        <tr>
+                                <td>u:</td>
+                                <td>434</td>
+                                <td>871</td>
+                        </tr>
+                        <tr>
+                                <td>i:</td>
+                                <td>294</td>
+                                <td>2110</td>
+                        </tr>
+                        <tr>
+                                <td>O</td>
+                                <td>611</td>
+                                <td>777</td>
+                        </tr>
+                        <tr>
+                                <td>a:</td>
+                                <td>675</td>
+                                <td>1130</td>
+                        </tr>
+                        <tr>
+                                <td>@</td>
+                                <td>471</td>
+                                <td>1450</td>
+                        </tr>
+                </table>
+        </td>
+
+        <td>
+                <table style="width:100%">
+                        <tr>
+                                <th> Vokal</th>
+                                <th>F1 [Hz]</th>
+                                <th>F2 [Hz]</th>
+                        </tr>
+                        <tr>
+                                <td>a</td>
+                                <td>815</td>
+                                <td>1577</td>
+                        </tr>
+                        <tr>
+                                <td>o:</td>
+                                <td>777</td>
+                                <td>2796</td>
+                        </tr>
+                        <tr>
+                                <td>u:</td>
+                                <td>662</td>
+                                <td>2623</td>
+                        </tr>
+                        <tr>
+                                <td>i:</td>
+                                <td>319</td>
+                                <td>2262</td>
+                        </tr>
+                        <tr>
+                                <td>O</td>
+                                <td>700</td>
+                                <td>1208</td>
+                        </tr>
+                        <tr>
+                                <td>a:</td>
+                                <td>713</td>
+                                <td>1246</td>
+                        </tr>
+                        <tr>
+                                <td>@</td>
+                                <td>510</td>
+                                <td>1742</td>
+                        </tr>
+                </table>
+        </td>
+        </tr>
+        <tr>
+                <td><img src="../ueb3/fatih.png" alt="Aufnahme" width="750" height="700"></td>
+                <td><img src="../ueb3/mehmet.png" alt="Aufnahme" width="750" height="700"></td>
+                <td><img src="../ueb3/taher.png" alt="Aufnahme" width="750" height="700"></td>
+        </tr>
+        </table>
+
+</body>
+
+</html>

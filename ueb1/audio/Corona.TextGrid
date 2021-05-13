@@ -1,0 +1,42 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 0.9175 
+tiers? <exists> 
+size = 1 
+item []: 
+    item [1]:
+        class = "IntervalTier" 
+        name = "Phon" 
+        xmin = 0 
+        xmax = 0.9175 
+        intervals: size = 7 
+        intervals [1]:
+            xmin = 0 
+            xmax = 0.00418491701258312 
+            text = "" 
+        intervals [2]:
+            xmin = 0.00418491701258312 
+            xmax = 0.10304757462686567 
+            text = "C" 
+        intervals [3]:
+            xmin = 0.10304757462686567 
+            xmax = 0.3228367537313433 
+            text = "o:" 
+        intervals [4]:
+            xmin = 0.3228367537313433 
+            xmax = 0.40226212686567164 
+            text = "R" 
+        intervals [5]:
+            xmin = 0.40226212686567164 
+            xmax = 0.6090419776119403 
+            text = "o:" 
+        intervals [6]:
+            xmin = 0.6090419776119403 
+            xmax = 0.687097947761194 
+            text = "n" 
+        intervals [7]:
+            xmin = 0.687097947761194 
+            xmax = 0.9175 
+            text = "a" 
